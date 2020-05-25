@@ -6,7 +6,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 8000;
 
-app.get('/test', (req,res) => {
+app.get('/api/test', (req,res) => {
     res.send(`Also, the API says hello to ${faker.name.firstName()}!`)
 })
 

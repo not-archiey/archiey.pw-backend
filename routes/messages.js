@@ -14,11 +14,11 @@ module.exports.post = async (req,res) => {
 
     //TODO: seems like you can use a middleware here bud
     await sequelize.sync()
-    const jane = await Message.create({
+    const message = await Message.create({
         name : req.body.name,
         message : req.body.message
     });
-    console.log(jane.toJSON())
+    console.log(message.toJSON())
 
     res.status(200).json({"status" : "OK"})
 }

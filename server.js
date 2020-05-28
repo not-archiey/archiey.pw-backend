@@ -1,13 +1,16 @@
-require('dotenv');
+require('dotenv').config()
 
-const faker = require('faker');
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 8000
 
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 8000;
+const testRoute = require('./routes/test')
+const messagesRoute = require('./routes/messages');
 
-app.get('/api/test', (req,res) => {
-    res.send(`Also, the API says hello to ${faker.name.firstName()}!`)
-})
+app.use(express.json())
+
+app.get('/api/test', testRoute)
+app.get('/api/messages', messagesRoute.get)
+app.post('/api/messages', messagesRoute.post)
 
 app.listen(port, () => console.log(`Listening on ${port}`));

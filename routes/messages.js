@@ -3,7 +3,9 @@ const Message = require('../models/Message')
 
 module.exports.get = async (req, res) => {
     await sequelize.sync()
-    const allMessages = await Message.findAll()
+    const limit = req.query.count || -1
+
+    const allMessages = await Message.findAll({limit, order: [['updatedAt', 'DESC']]})
     res.status(200).json(allMessages)
 }
 
